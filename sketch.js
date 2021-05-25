@@ -1,7 +1,7 @@
 let puzzle;
 function setup() {
     createCanvas(700, 700);
-    puzzle = new Puzzle(3)
+    puzzle = new Puzzle(3);
 }
 
 function draw() {

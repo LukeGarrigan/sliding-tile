@@ -6,7 +6,7 @@ class Puzzle {
 
     createNumbers() {
         let numbers = [];
-        for (let i = 0; i < this.size*this.size; i++) {
+        for (let i = 0; i < this.size * this.size; i++) {
             numbers.push(i);
         }
         return numbers;
@@ -27,14 +27,16 @@ class Puzzle {
     }
 
     drawNumbers() {
-        let y = 10;
-        let x = 10;
+        textSize(30);
+        textAlign(CENTER);
+        let y = (height / this.size) / 2;
+        let x = (width / this.size) / 2;
         for (let i = 0; i < this.numbers.length; i++) {
             text(this.numbers[i], x, y);
             x += width / this.size;
             if (i % this.size == 2) {
-                x = 0;
-                y += height/this.size;
+                x = (width / this.size) / 2;
+                y += height / this.size;
             }
         }
     }
