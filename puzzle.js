@@ -8,7 +8,7 @@ class Puzzle {
         let x = width / PUZZLE_SIZE / 2;
         let y = height / PUZZLE_SIZE / 2;
         for (let i = 0; i < PUZZLE_SIZE * PUZZLE_SIZE; i++) {
-            tiles.push(new Tile(x, y, i));
+            tiles.push(new Tile(x, y, i, i));
             x += width / PUZZLE_SIZE;
             if (i % PUZZLE_SIZE == PUZZLE_SIZE - 1) {
                 x = width / PUZZLE_SIZE / 2;
@@ -27,22 +27,27 @@ class Puzzle {
     movePiece(mouseX, mouseY) {
         let smallest = Infinity;
         let num = -1;
-        let closestTile;
+        let tileToMove;
         for (let tile of this.tiles) {
             let distance = dist(mouseX, mouseY, tile.x, tile.y);
             if (distance < smallest) {
                 smallest = distance;
                 num = tile.number;
-                closestTile = tile;
+                tileToMove = tile;
             }
         }
 
-        if (this.tileIsMoveable(num)) {
-            closestTile.moveTo(this.tiles.find(t => t.number === 0));
+        const zeroTile = this.tiles.find(t => t.number === 0);
+        if (this.tileIsMoveable(tileToMove, zeroTile)) {
+            tileToMove.moveTo(zeroTile);
         }
     }
 
-    tileIsMoveable() {
-        return true;
+    tileIsMoveable(tile, zeroTile) {
+        if (abs(tile.index - zeroTile.index) == 1) {
+            return true;
+        } else if (abs(tile.index - zeroTile.index) == PUZZLE_SIZE) {
+            return true;
+        }
     }
 }

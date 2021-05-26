@@ -1,8 +1,9 @@
 class Tile {
-    constructor(x, y, number) {
+    constructor(x, y, number, index) {
         this.x = x;
         this.y = y;
         this.number = number;
+        this.index = index;
     }
 
 
@@ -33,11 +34,14 @@ class Tile {
     moveTo(zeroTile) {
         let x = this.x;
         let y = this.y;
+        let index = this.index;
 
         this.x = zeroTile.x;
         this.y = zeroTile.y;
+        this.index = zeroTile.index;
 
         zeroTile.x = x;
         zeroTile.y = y;
+        zeroTile.index = index;
     }
 }
