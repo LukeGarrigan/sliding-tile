@@ -44,10 +44,31 @@ class Puzzle {
     }
 
     tileIsMoveable(tile, zeroTile) {
-        if (abs(tile.index - zeroTile.index) == 1) {
-            return true;
-        } else if (abs(tile.index - zeroTile.index) == PUZZLE_SIZE) {
+        let indexes = [];
+        // can move left
+        if (zeroTile.index % PUZZLE_SIZE != 0) {
+            indexes.push(zeroTile.index - 1);
+        }
+
+        // can move right
+        if (zeroTile.index % PUZZLE_SIZE != PUZZLE_SIZE-1) {
+            indexes.push(zeroTile.index + 1);
+        }
+
+        // can move up
+        if (zeroTile.index >= PUZZLE_SIZE) {
+            indexes.push(zeroTile.index - PUZZLE_SIZE);
+        }
+
+        // can move down
+        if (zeroTile.index < PUZZLE_SIZE*PUZZLE_SIZE-PUZZLE_SIZE) {
+            indexes.push(zeroTile.index + PUZZLE_SIZE);
+        }
+
+        if (indexes.includes(tile.index)) {
             return true;
         }
+
+        return false;
     }
 }
