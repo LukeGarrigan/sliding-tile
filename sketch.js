@@ -1,4 +1,4 @@
-const PUZZLE_SIZE = 4;
+const PUZZLE_SIZE = 3;
 let puzzle;
 function setup() {
     createCanvas(700, 700);
