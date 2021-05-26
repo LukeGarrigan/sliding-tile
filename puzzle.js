@@ -1,43 +1,26 @@
 class Puzzle {
-    constructor(size) {
-        this.size = size;
-        this.numbers = this.createNumbers();
+    constructor() {
+        this.tiles = this.createTiles();
     }
 
-    createNumbers() {
-        let numbers = [];
-        for (let i = 0; i < this.size * this.size; i++) {
-            numbers.push(i);
+    createTiles() {
+        let tiles = [];
+        let x = 0;
+        let y = 0;
+        for (let i = 0; i < PUZZLE_SIZE * PUZZLE_SIZE; i++) {
+            tiles.push(new Tile(x, y, i));
+            x += width / PUZZLE_SIZE;
+            if (i % PUZZLE_SIZE == PUZZLE_SIZE - 1) {
+                x = 0;
+                y += height / PUZZLE_SIZE;
+            }
         }
-        return numbers;
+        return tiles;
     }
 
     draw() {
-        this.drawGrid();
-        this.drawNumbers();
-    }
-
-    drawGrid() {
-        for (let i = 0; i < width; i += width / this.size) {
-            line(i, 0, i, height);
-            for (let j = 0; j < height; j += height / this.size) {
-                line(0, j, width, j);
-            }
-        }
-    }
-
-    drawNumbers() {
-        textSize(30);
-        textAlign(CENTER);
-        let y = (height / this.size) / 2;
-        let x = (width / this.size) / 2;
-        for (let i = 0; i < this.numbers.length; i++) {
-            text(this.numbers[i], x, y);
-            x += width / this.size;
-            if (i % this.size == 2) {
-                x = (width / this.size) / 2;
-                y += height / this.size;
-            }
+        for (let tile of this.tiles) {
+            tile.draw();
         }
     }
 }
