@@ -1,4 +1,4 @@
-const PUZZLE_SIZE = 3;
+const PUZZLE_SIZE = 4;
 let puzzle;
 function setup() {
     createCanvas(700, 700);
@@ -8,4 +8,8 @@ function setup() {
 function draw() {
     background(220);
     puzzle.draw();
+}
+
+function mousePressed() {
+    puzzle.movePiece(mouseX, mouseY);
 }
