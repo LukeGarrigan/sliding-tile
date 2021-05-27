@@ -6,7 +6,8 @@ function setup() {
 }
 
 function draw() {
-    background(220);
+    background(235, 236, 209);
+    puzzle.update();
     puzzle.draw();
 }
 

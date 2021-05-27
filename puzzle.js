@@ -18,6 +18,12 @@ class Puzzle {
         return tiles;
     }
 
+    update() {
+        for (let tile of this.tiles) {
+            tile.update();
+        }
+    }
+
     draw() {
         for (let tile of this.tiles) {
             tile.draw();
