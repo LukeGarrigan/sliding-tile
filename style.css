@@ -1,6 +1,7 @@
 html, body {
   padding: 0;
   margin: 10px;
+  background: #312e2b;
 }
 canvas {
   padding: 0;

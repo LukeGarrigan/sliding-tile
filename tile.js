@@ -17,17 +17,18 @@ class Tile {
     }
 
     drawTile() {
-        fill(42, 157, 244);
+        fill(119, 149, 90)
         rect(this.x, this.y, width/PUZZLE_SIZE, height/PUZZLE_SIZE);
 
         textAlign(CENTER, CENTER);
+        stroke(1);
         textSize(50);
         fill(255);
         text(this.number, this.x, this.y);
     }
 
     drawEmptyTile() {
-        fill(208, 239, 255);
+        fill(235, 236, 209)
         rect(this.x, this.y, width/PUZZLE_SIZE, height/PUZZLE_SIZE);
     }
 
