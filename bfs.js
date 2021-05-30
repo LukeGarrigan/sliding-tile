@@ -5,6 +5,5 @@ class BFS {
     solve(puzzle) {
         console.log('Solving using BFS');
         this.puzzle = puzzle;
-        
     }
 }

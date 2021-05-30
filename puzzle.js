@@ -3,6 +3,7 @@ class Puzzle {
         this.tiles = this.createTiles();
         this.previousMove = -1;
         this.moveCount = 0;
+        this.goal = this.generateGoal();
     }
 
     createTiles() {
@@ -18,6 +19,14 @@ class Puzzle {
             }
         }
         return tiles;
+    }
+
+    generateGoal() {
+        let goal = [];
+        for (let i = 0; i < this.tiles.length; i++) {
+            goal.push(i);
+        }
+        return goal;
     }
 
     update() {
