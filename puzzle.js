@@ -1,6 +1,8 @@
 class Puzzle {
     constructor() {
         this.tiles = this.createTiles();
+        this.previousMove = -1;
+        this.moveCount = 0;
     }
 
     createTiles() {
@@ -46,6 +48,22 @@ class Puzzle {
         const zeroTile = this.tiles.find(t => t.number === 0);
         if (this.tileIsMoveable(tileToMove, zeroTile)) {
             tileToMove.moveTo(zeroTile);
+        }
+    }
+
+    moveRandomTile() {
+        if (this.moveCount >= MOVES_FROM_GOAL) return;
+        let moved = false;
+        while(!moved) {
+            let number = floor(random(this.tiles.length));
+            const zeroTile = this.tiles.find(t => t.number === 0);
+            const tile = this.tiles.find(t => t.number === number);
+            if (number != this.previousMove && this.tileIsMoveable(tile, zeroTile)) {
+                tile.moveTo(zeroTile);
+                moved = true;
+                this.previousMove = tile.number;
+                this.moveCount++;
+            }
         }
     }
 
