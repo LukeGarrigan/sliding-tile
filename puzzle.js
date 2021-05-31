@@ -109,4 +109,55 @@ class Puzzle {
         }
         return indexes;
     }
-}
+
+    static getNeighbours(current) {
+        const zeroTileIndex = current.findIndex(t => t === 0);
+        let states = [];
+        // can move left
+        if (zeroTileIndex % PUZZLE_SIZE != 0) {
+            let copy = current.slice();
+            let tileToMove = copy[zeroTileIndex-1];
+            copy[zeroTileIndex] = tileToMove;
+            copy[zeroTileIndex-1] = 0;
+            states.push(copy);
+        }
+
+        // can move right
+        if (zeroTileIndex % PUZZLE_SIZE != PUZZLE_SIZE-1) {
+            let copy = current.slice();
+            let tileToMove = copy[zeroTileIndex+1];
+            copy[zeroTileIndex] = tileToMove;
+            copy[zeroTileIndex+1] = 0;
+            states.push(copy);
+        }
+
+        // can move up
+        if (zeroTileIndex >= PUZZLE_SIZE) {
+            let copy = current.slice();
+            let tileToMove = copy[zeroTileIndex - PUZZLE_SIZE];
+            copy[zeroTileIndex] = tileToMove;
+            copy[zeroTileIndex - PUZZLE_SIZE] = 0;
+            states.push(copy);
+        }
+
+        // can move down
+        if (zeroTileIndex < PUZZLE_SIZE*PUZZLE_SIZE-PUZZLE_SIZE) {
+            let copy = current.slice();
+            let tileToMove = copy[zeroTileIndex + PUZZLE_SIZE];
+            copy[zeroTileIndex] = tileToMove;
+            copy[zeroTileIndex + PUZZLE_SIZE] = 0;
+            states.push(copy);
+        }
+        return states;
+    }
+
+    toArray() {
+        const indexes = this.tiles.map(t => t.index);
+        let arr = [];
+        for (let i = 0; i < indexes.length; i++) {
+            const index = indexes.indexOf(i);
+            arr.push(index);
+        }
+        return arr;
+    }
+} 

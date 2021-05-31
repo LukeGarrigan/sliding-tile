@@ -1,5 +1,5 @@
 const PUZZLE_SIZE = 3;
-const MOVES_FROM_GOAL = 20;
+const MOVES_FROM_GOAL = 10;
 const ALGORITHM = 'BFS';
 let puzzle;
 function setup() {
@@ -23,8 +23,6 @@ function mousePressed() {
 
 
 function keyPressed() {
-    console.log(keyCode);
-
     if (keyCode === 82) { // r
         moveRandomly = !moveRandomly;
     }
@@ -35,6 +33,6 @@ function keyPressed() {
             searchAlgorithm.set(new BFS());
         }
 
-        searchAlgorithm.solve(puzzle);
+        searchAlgorithm.solve(puzzle.toArray(), puzzle.goal);
     }
 }

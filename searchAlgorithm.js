@@ -6,7 +6,7 @@ class SearchAlgorithm {
         this.algorithm = algorithm;
     }
 
-    solve(tiles) {
-        this.algorithm.solve(tiles)
+    solve(puzzle, goal) {
+        this.algorithm.solve(puzzle, goal)
     }
 }
