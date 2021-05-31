@@ -53,9 +53,8 @@ class Puzzle {
                 tileToMove = tile;
             }
         }
-
         const zeroTile = this.tiles.find(t => t.number === 0);
-        if (this.tileIsMoveable(tileToMove, zeroTile)) {
+        if (this.isMoveable(tileToMove.index)) {
             tileToMove.moveTo(zeroTile);
         }
     }
@@ -67,7 +66,7 @@ class Puzzle {
             let number = floor(random(this.tiles.length));
             const zeroTile = this.tiles.find(t => t.number === 0);
             const tile = this.tiles.find(t => t.number === number);
-            if (number != this.previousMove && this.tileIsMoveable(tile, zeroTile)) {
+            if (number != this.previousMove && this.isMoveable(tile.index)) {
                 tile.moveTo(zeroTile);
                 moved = true;
                 this.previousMove = tile.number;
@@ -76,7 +75,18 @@ class Puzzle {
         }
     }
 
-    tileIsMoveable(tile, zeroTile) {
+
+    isMoveable(index) {
+        let moves = this.findLegalMoves();
+
+        if (moves.includes(index)) {
+            return true;
+        }
+        return false;
+    }
+
+    findLegalMoves() {
+        const zeroTile = this.tiles.find(t => t.number === 0);
         let indexes = [];
         // can move left
         if (zeroTile.index % PUZZLE_SIZE != 0) {
@@ -97,11 +107,6 @@ class Puzzle {
         if (zeroTile.index < PUZZLE_SIZE*PUZZLE_SIZE-PUZZLE_SIZE) {
             indexes.push(zeroTile.index + PUZZLE_SIZE);
         }
-
-        if (indexes.includes(tile.index)) {
-            return true;
-        }
-
-        return false;
+        return indexes;
     }
 }
