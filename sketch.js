@@ -1,4 +1,4 @@
-const PUZZLE_SIZE = 4;
+const PUZZLE_SIZE = 3;
 const MOVES_FROM_GOAL = 10;
 const ALGORITHM = 'BFS';
 let puzzle;
@@ -16,6 +16,7 @@ function draw() {
 
     if (frameCount % 30 == 0) {
         puzzle.moveRandomTile();
+        puzzle.moveTowardGoal();
     }
 }
 
@@ -42,6 +43,7 @@ function solvePuzzle() {
 
     let before = new Date();
     let goal = searchAlgorithm.solve(puzzle.toArray(), puzzle.goal);
+    puzzle.moveTilesToGoal(goal.state);
     let moveCount = getMoveCount(goal.state);
 
     let elapsed = new Date() - before;
@@ -53,7 +55,6 @@ function solvePuzzle() {
     time.textContent = ` Time: ${elapsed / 1000}s`;
     moves.textContent = ` Moves: ${moveCount}`;
     expanded.textContent = `States expanded: ${goal.expanded}`;
-    //expanded.textContent ` States expanded: ${goal.expanded}`;
     console.log(elapsed / 1000);
 }
 

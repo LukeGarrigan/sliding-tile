@@ -53,10 +53,13 @@ class Puzzle {
                 tileToMove = tile;
             }
         }
-        const zeroTile = this.tiles.find(t => t.number === 0);
-        if (this.isMoveable(tileToMove.index)) {
-            tileToMove.moveTo(zeroTile);
+        if (smallest < 150) {
+            const zeroTile = this.tiles.find(t => t.number === 0);
+            if (this.isMoveable(tileToMove.index)) {
+                tileToMove.moveTo(zeroTile);
+            }
         }
+        
     }
 
     moveRandomTile() {
@@ -151,6 +154,7 @@ class Puzzle {
         return states;
     }
 
+
     toArray() {
         const indexes = this.tiles.map(t => t.index);
         let arr = [];
@@ -160,4 +164,31 @@ class Puzzle {
         }
         return arr;
     }
+
+    // victory lap code
+    moveTilesToGoal(state) {
+        this.goalArray = this.mapToArray(state);
+    }
+
+    moveTowardGoal() {
+        if (!this.goalArray || this.goalArray.length < 2) return; 
+        this.goalArray.pop();
+        let move = this.goalArray[this.goalArray.length-1];
+        let zeroIndexGoal = move.current.findIndex(m => m === 0);
+        const zeroTile = this.tiles.find(t => t.number === 0);
+        let tileToMove = this.tiles.find(t => t.index === zeroIndexGoal);
+        tileToMove.moveTo(zeroTile);
+    }
+
+    mapToArray(goal) {
+        let arr = [goal];
+        let current = goal.previous;
+        do {
+            arr.push(current);
+            current = current.previous;
+        } while (current != null) 
+            
+        return arr;
+    }
+    
 } 
