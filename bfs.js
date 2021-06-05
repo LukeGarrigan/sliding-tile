@@ -4,17 +4,23 @@ class BFS {
     }
     solve(puzzle, goal) {
         console.log(puzzle, goal);
+        puzzle = new State(null, puzzle);
+
         let seen = [puzzle];
         let queue = [puzzle];
         while(queue.length > 0) {
-            let current = queue.shift();
-
-            if (this.isEqual(current, goal)) {
-                console.log('Found goal', current);
-                return;
+            let state = queue.shift();
+            if (this.isEqual(state.current, goal)) {
+                console.log('Found goal', state);
+                return {
+                    state,
+                    expanded: seen.length
+                }
             }
 
-            for (let neighbour of Puzzle.getNeighbours(current)) {
+            for (let neighbour of Puzzle.getNeighbours(state.current)) {
+                neighbour = new State(state, neighbour);
+
                 if (!this.isInSeen(seen, neighbour)) {
                     seen.push(neighbour);
                     queue.push(neighbour);
@@ -33,9 +39,9 @@ class BFS {
         return true;
     }
 
-    isInSeen(seen, neighbour) { 
+    isInSeen(seen, neighbourState) { 
         for (let alreadySeen of seen) {
-            if (this.isEqual(alreadySeen, neighbour)) {
+            if (this.isEqual(alreadySeen.current, neighbourState.current)) {
                 return true;
             }
         }

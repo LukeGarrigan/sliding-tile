@@ -7,6 +7,6 @@ class SearchAlgorithm {
     }
 
     solve(puzzle, goal) {
-        this.algorithm.solve(puzzle, goal)
+        return this.algorithm.solve(puzzle, goal)
     }
 }

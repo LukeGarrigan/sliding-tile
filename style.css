@@ -1,11 +1,60 @@
 html, body {
   padding: 0;
-  margin: 10px;
+  margin: 40px;
   background: #312e2b;
 }
 canvas {
   padding: 0;
   margin: auto;
   display: flex;
+}
+
+#canvas-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 75vh;
+}
+
+.stats-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stats {
+  width: 700px;
+  display: flex;
+  justify-content: left;
+}
+
+.button {
+  background: #7fa650;
+  border-radius: 5px;
+  font-size: 20px;
+  font-family: "Montserrat";
+  height: 50px;
+  border: 0;
+  width: 100px;
+  color: white;
+  cursor: pointer;
+  user-select: none;
+}
+
+.button:hover {
+  background: #537133;
+}
+
+.stats-text-container {
+  display: flex;
+  flex-direction: row;
+  margin-left: 20px;
+}
+.stats-text {
+  position: relative;
+  height: 10px;
+  margin: 5px;
+  color: white;
+  margin-left: 50px;
 }
   
