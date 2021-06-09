@@ -183,6 +183,7 @@ class Puzzle {
     mapToArray(goal) {
         let arr = [goal];
         let current = goal.previous;
+        if (current == null) return arr;
         do {
             arr.push(current);
             current = current.previous;
